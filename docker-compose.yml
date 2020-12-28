@@ -7,7 +7,7 @@ services:
     networks:
       - application-network
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
       POSTGES_CONNECTION_STING : root
       DATABASE_DOMAIN: postgres
