@@ -18,6 +18,23 @@ services:
     depends_on:
       - postgres
 
+  demo-service1:
+    build: ./demo
+    container_name: demo-service1
+    networks:
+      - application-network
+    ports:
+      - "8082:8081"
+    environment:
+      POSTGES_CONNECTION_STING : root
+      DATABASE_DOMAIN: postgres
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      POSTGRES_DB: demo
+    tty: true
+    depends_on:
+      - postgres
+
   postgres:
     image: 'postgres'
     container_name: postgres
@@ -31,6 +48,23 @@ services:
     ports:
       - 5432:5432
     tty: true
+
+  nginx1:
+    build: ./nginx/app
+    container_name: nginx1
+    ports:
+      - "81:80"
+    links:
+      - demo-service
+
+  nginx2:
+    build: ./nginx/loadBalancer
+    container_name: nginx2
+    ports:
+      - "82:80"
+    links:
+      - demo-service
+      - demo-service1
 
 networks:
   application-network:
