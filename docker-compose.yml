@@ -58,7 +58,7 @@ services:
       - demo-service
 
   nginx2:
-    build: ./nginx/loadBalancer
+    build: ./nginx/load_balancer
     container_name: nginx2
     ports:
       - "82:80"
