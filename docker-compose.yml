@@ -14,9 +14,28 @@ services:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: root
       POSTGRES_DB: demo
+      LOCALHOST: 8081
     tty: true
     depends_on:
       - postgres
+
+  demo-service1:
+    build: ./demo
+    container_name: demo-service1
+    networks:
+      - application-network
+    ports:
+      - "8082:8081"
+    environment:
+      POSTGES_CONNECTION_STING : root
+      DATABASE_DOMAIN: postgres1
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      POSTGRES_DB: demo
+      LOCALHOST: 8082
+    tty: true
+    depends_on:
+      - postgres1
 
   postgres:
     image: 'postgres'
@@ -32,9 +51,44 @@ services:
       - 5432:5432
     tty: true
 
+  postgres1:
+    image: 'postgres'
+    container_name: postgres1
+    restart: always
+    networks:
+      -  application-network
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=demo
+    ports:
+      - 5433:5432
+    tty: true
+
+  nginx1:
+    build: ./nginx/app
+    container_name: nginx1
+    ports:
+      - "81:80"
+    networks:
+      -  application-network
+    links:
+      - demo-service
+
+  nginx2:
+    build: ./nginx/load_balancer
+    container_name: nginx2
+    ports:
+      - "82:80"
+    networks:
+      -  application-network
+    links:
+      - demo-service
+      - demo-service1
+
 networks:
   application-network:
-    driver: bridge
+    #driver: bridge
 
 
 

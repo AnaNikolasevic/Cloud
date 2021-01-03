@@ -13,9 +13,9 @@ public class Controller {
 	Service service;
 	
 	@GetMapping("/cloud")
-	public int firstMethod() {      
+	public String firstMethod() {      
 		
-		return service.getAndCount();
+		return "Count number: " + service.getAndCount() + " from localhost: " + System.getenv("LOCALHOST");
 	}
 	
 	@GetMapping("/env")
