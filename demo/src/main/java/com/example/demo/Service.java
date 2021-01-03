@@ -17,6 +17,7 @@ public class Service {
 		} else {
 			counter = repository.getOne((long) 0);
 		}
+		
 		counter.setCountingNumber(counter.getCountingNumber()+1);
 		repository.save(counter);
 		return counter.getCountingNumber();
