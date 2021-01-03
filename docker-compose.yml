@@ -2,7 +2,7 @@ version: '3'
 services:
 
   demo-service:
-    build: ./demo
+    image: ananikolasevic/cloud-computing
     container_name: demo-service
     networks:
       - application-network
@@ -20,7 +20,7 @@ services:
       - postgres
 
   demo-service1:
-    build: ./demo
+    image: ananikolasevic/cloud-computing
     container_name: demo-service1
     networks:
       - application-network
