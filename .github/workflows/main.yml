@@ -4,7 +4,7 @@ name: ci
 
 on:
   push:
-    branches: master, adding-main.yml
+    branches: [master, adding-main.yml]
 
 jobs:
   main:
