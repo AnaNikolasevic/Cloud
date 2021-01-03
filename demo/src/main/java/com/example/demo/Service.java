@@ -10,6 +10,7 @@ public class Service {
 	
 	public int getAndCount() {
 		Counter counter;
+		
 		if(repository.findById((long) 0).orElse(null)==null) {
 			counter = new Counter();
 			counter.setId((long) 0);
