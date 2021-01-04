@@ -2,7 +2,7 @@ version: '3'
 services:
 
   demo-service:
-    image: ananikolasevic/cloud-computing
+    build: ./demo
     container_name: demo-service
     networks:
       - application-network
@@ -20,7 +20,7 @@ services:
       - postgres
 
   demo-service1:
-    image: ananikolasevic/cloud-computing
+    build: ./demo
     container_name: demo-service1
     networks:
       - application-network
@@ -95,7 +95,7 @@ networks:
     #driver: bridge
 
 volumes:
-  vol1:
-  vol2:
+  vol1: {}
+  vol2: {}
 
 
