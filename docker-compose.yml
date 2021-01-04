@@ -50,6 +50,8 @@ services:
     ports:
       - 5432:5432
     tty: true
+    volumes: 
+      - vol1:/var/lib/postgresql/data
 
   postgres1:
     image: 'postgres'
@@ -64,6 +66,8 @@ services:
     ports:
       - 5433:5432
     tty: true
+    volumes: 
+      - vol2:/var/lib/postgresql/data
 
   nginx1:
     build: ./nginx/app
@@ -90,5 +94,8 @@ networks:
   application-network:
     #driver: bridge
 
+volumes:
+  vol1:
+  vol2:
 
 
