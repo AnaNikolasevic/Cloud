@@ -78,7 +78,6 @@ services:
       -  application-network
     links:
       - demo-service
-
   nginx2:
     build: ./nginx/load_balancer
     container_name: nginx2
